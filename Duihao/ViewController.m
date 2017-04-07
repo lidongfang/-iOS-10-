@@ -129,9 +129,9 @@
      self.textView.text=@"Ready！Say something, I'm listening";
 }
 
+// 采用touch 是模仿微信按下去的时候可以一直说话
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.textView resignFirstResponder];
-   
     [self startRecording];
 }
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
