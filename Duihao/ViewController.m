@@ -83,6 +83,7 @@
     UIView *destinationView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-50, 150, 100, 20)];
     [self.view addSubview:destinationView];
     destinationView.backgroundColor=[UIColor purpleColor];
+    
     destinationView.transform=CGAffineTransformIdentity;
     
 //    // 1 、位移变换
@@ -93,18 +94,39 @@
 //    }];
     
     
-    // 2、 缩放变换 在原基础上进行的缩放变化
-    [UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
-        // 在原基础上横纵坐标的size 的缩放
-//        destinationView.transform =CGAffineTransformMakeScale(3, 3)//CGAffineTransformIdentity默认是 [ 1 0 0 1 0 0 ]  跟下面的效果一样
-         destinationView.transform=CGAffineTransformScale(CGAffineTransformIdentity,3, 3);
-        
-        
-    } completion:^(BOOL finished) {
-        // 再次变换回去
-        [UIView animateWithDuration:0.3 animations:^{
-            destinationView.transform=CGAffineTransformScale(CGAffineTransformIdentity,1, 1);
-        }];
+    
+    
+//    // 2、 缩放变换 在原基础上进行的缩放变化
+//    [UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
+//        // 在原基础上横纵坐标的size 的缩放
+////        destinationView.transform =CGAffineTransformMakeScale(3, 3)//CGAffineTransformIdentity默认是 [ 1 0 0 1 0 0 ]  跟下面的效果一样
+//         destinationView.transform=CGAffineTransformScale(CGAffineTransformIdentity,3, 3);
+//        
+//        
+//    } completion:^(BOOL finished) {
+//        // 再次变换回去
+//        [UIView animateWithDuration:0.3 animations:^{
+//            destinationView.transform=CGAffineTransformScale(CGAffineTransformIdentity,1, 1);
+//        }];
+//    }];
+    
+    
+    
+    
+//    // 3 、 旋转动画
+//    [UIView animateWithDuration:1.0f animations:^{
+//        destinationView.transform = CGAffineTransformMakeRotation(M_PI);
+//    }]0.5
+    
+    
+    
+    // 4 、 组合动画
+    
+    //仿射变换的组合使用
+    [UIView animateWithDuration:1.0f animations:^{
+        CGAffineTransform transform1 = CGAffineTransformMakeRotation(M_PI);
+        CGAffineTransform transform2 = CGAffineTransformScale(transform1, 0.5, 0.5);
+        destinationView.transform = CGAffineTransformTranslate(transform2, 100, 50);
     }];
 }
 -(void)configSpeechFuntion {
