@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "2B24BF736F625718DB7E7D55AAED2B79B6C17BF0",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "2B24BF736F625718DB7E7D55AAED2B79B6C17BF0" : 9223372036854775807,
+    "E27813B7297A41C92A920C2EC65975013DE78543" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "93FDB704-4C94-4284-85B8-0FC9C796A74A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "2B24BF736F625718DB7E7D55AAED2B79B6C17BF0" : "Duihao\/",
+    "E27813B7297A41C92A920C2EC65975013DE78543" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Duihao",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Duihao.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:lidongfang\/-iOS-10-.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B24BF736F625718DB7E7D55AAED2B79B6C17BF0"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:lidongfang\/-iOS-10-.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E27813B7297A41C92A920C2EC65975013DE78543"
+    }
+  ]
+}

@@ -11,7 +11,9 @@
 #import "sucessView.h"
 //语音识别技术
 #import <Speech/Speech.h>
-@interface ViewController ()<SFSpeechRecognizerDelegate>
+// 文字转语音
+#import <AVFoundation/AVSpeechSynthesis.h>
+@interface ViewController ()<SFSpeechRecognizerDelegate,AVSpeechSynthesizerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *macroPhoneButton;
 //这个对象负责发起语音识别请求
@@ -21,16 +23,23 @@
 //这个对象引用了语音引擎
 @property (nonatomic ,strong) AVAudioEngine* audioEngine;
 @property (nonatomic ,strong) SFSpeechRecognizer *sf;
+//创建一个语音分析转化器
+@property (nonatomic ,strong) AVSpeechSynthesizer* av;
+// 一个文字的承载器
+@property (nonatomic ,strong) AVSpeechUtterance*utterance;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self showSuccessAnimation];
     
+    // 对号的动画展示
+    [self showSuccessAnimation];
     // ”本地化一段语音文件“进行识别
     [self configSpeechFuntion];
+    // 文字转变为语音
+    [self wordChangeToSpeech:nil];
     
    
 }
@@ -48,7 +57,6 @@
     NSLocale *local =[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     //2.创建一个语音识别对象
     self.sf =[[SFSpeechRecognizer alloc] initWithLocale:local];
-    self.sf.delegate=self;
     [SFSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus status) {
         switch (status) {
             case SFSpeechRecognizerAuthorizationStatusAuthorized:
@@ -86,6 +94,8 @@
         self.recognitionTask=nil;
     }
     AVAudioSession *autoSession=[AVAudioSession sharedInstance];
+    
+    
     @try {
         [autoSession setCategory:AVAudioSessionCategoryRecord error:nil];
         [autoSession setMode:AVAudioSessionModeMeasurement error:nil];
@@ -112,7 +122,8 @@
             self.textView.text=result.bestTranscription.formattedString;
 //            // 如果想在你说的话后面一直拼接就不需要endAudio
 //            [self.recognitionRequest endAudio];
-        }
+            [self wordChangeToSpeech:self.textView.text];
+            }
     }];
     AVAudioFormat * recordingFormat=[self.audioEngine.inputNode outputFormatForBus:0];
     [self.audioEngine.inputNode installTapOnBus:0 bufferSize:1024 format:recordingFormat block:^(AVAudioPCMBuffer * _Nonnull buffer, AVAudioTime * _Nonnull when) {
@@ -128,7 +139,42 @@
     // 一切准备就绪开始讲话
      self.textView.text=@"Ready！Say something, I'm listening";
 }
+-(void)wordChangeToSpeech:(NSString *)wordString{
+    NSLog(@"current thread ----%@",[NSThread currentThread]);
+    
+    // 初始化语音分析器
+    self.av=[[AVSpeechSynthesizer alloc]init];
+    self.av.delegate=self;
+    // 初始化文字承载器以及相关的设置
+    self.utterance=[[AVSpeechUtterance alloc]initWithString:@"锦瑟无端五十弦，一弦一柱思华年。"];
+    self.utterance.rate=0.5;// 设置语速，范围0-1，注意0最慢，1最快；AVSpeechUtteranceMinimumSpeechRate最慢，AVSpeechUtteranceMaximumSpeechRate最快
+    AVSpeechSynthesisVoice*voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh_CN"];//设置发音，这是中文普通话
+    self.utterance.voice= voice;
+    [self.av speakUtterance:self.utterance];//开始
 
+    
+}
+#pragma  mark --- AVSpeechSynthesizerDelegate
+- (void)speechSynthesizer:(AVSpeechSynthesizer*)synthesizer didStartSpeechUtterance:(AVSpeechUtterance*)utterance{
+    NSLog(@"---开始播放");
+    
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer*)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance*)utterance{
+    NSLog(@"---完成播放");
+    
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer*)synthesizer didPauseSpeechUtterance:(AVSpeechUtterance*)utterance{
+    NSLog(@"---播放中止");
+    
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer*)synthesizer didContinueSpeechUtterance:(AVSpeechUtterance*)utterance{
+    NSLog(@"---恢复播放");
+    
+}
+- (void)speechSynthesizer:(AVSpeechSynthesizer*)synthesizer didCancelSpeechUtterance:(AVSpeechUtterance*)utterance{
+    NSLog(@"---播放取消");
+    
+}
 // 采用touch 是模仿微信按下去的时候可以一直说话
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.textView resignFirstResponder];

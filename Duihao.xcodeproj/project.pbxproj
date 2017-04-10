@@ -17,6 +17,8 @@
 		C56745791E961B160060ABA8 /* DuihaoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C56745781E961B160060ABA8 /* DuihaoUITests.m */; };
 		C56745881E961B8E0060ABA8 /* sucessView.m in Sources */ = {isa = PBXBuildFile; fileRef = C56745871E961B8E0060ABA8 /* sucessView.m */; };
 		C59055301E9764DA00FE7DE1 /* red_pocket.caf in Resources */ = {isa = PBXBuildFile; fileRef = C590552F1E9764DA00FE7DE1 /* red_pocket.caf */; };
+		C59055331E9B2A0F00FE7DE1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59055321E9B2A0F00FE7DE1 /* AVFoundation.framework */; };
+		C59055351E9B2A2200FE7DE1 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59055341E9B2A2200FE7DE1 /* Speech.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		C56745861E961B8E0060ABA8 /* sucessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sucessView.h; sourceTree = "<group>"; };
 		C56745871E961B8E0060ABA8 /* sucessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sucessView.m; sourceTree = "<group>"; };
 		C590552F1E9764DA00FE7DE1 /* red_pocket.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = red_pocket.caf; sourceTree = "<group>"; };
+		C59055321E9B2A0F00FE7DE1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		C59055341E9B2A2200FE7DE1 /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C59055351E9B2A2200FE7DE1 /* Speech.framework in Frameworks */,
+				C59055331E9B2A0F00FE7DE1 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +96,7 @@
 				C567456C1E961B160060ABA8 /* DuihaoTests */,
 				C56745771E961B160060ABA8 /* DuihaoUITests */,
 				C56745511E961B160060ABA8 /* Products */,
+				C59055311E9B2A0F00FE7DE1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +153,15 @@
 				C567457A1E961B160060ABA8 /* Info.plist */,
 			);
 			path = DuihaoUITests;
+			sourceTree = "<group>";
+		};
+		C59055311E9B2A0F00FE7DE1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C59055341E9B2A2200FE7DE1 /* Speech.framework */,
+				C59055321E9B2A0F00FE7DE1 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
