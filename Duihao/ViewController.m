@@ -12,7 +12,7 @@
 //语音识别技术
 #import <Speech/Speech.h>
 // 文字转语音
-#import <AVFoundation/AVSpeechSynthesis.h>
+#import <AVFoundation/AVFoundation.h>
 @interface ViewController ()<SFSpeechRecognizerDelegate,AVSpeechSynthesizerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *macroPhoneButton;
@@ -34,8 +34,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 对号的动画展示
+    // 对号的动画展示(贝塞尔曲线)
     [self showSuccessAnimation];
+    // 针对UIView 层级的 layer层进行动画操作
+    [self viewLayerShowAnnimation];
+    // 除了UIView 自带animation、CABasicAnimation 动画意外 我们别忘了还有几本的  CGAffineTransform
+    [self viewAffineShowAnimation];
     // ”本地化一段语音文件“进行识别
     [self configSpeechFuntion];
     // 文字转变为语音
@@ -44,13 +48,65 @@
    
 }
 
+//动画的创建
 -(void)showSuccessAnimation {
-    sucessView *view=[[sucessView alloc]initWithFrame:CGRectMake(50, 64, 100, 100)];
+    sucessView *view=[[sucessView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-50, 0, 100, 100)];
     view.backgroundColor=[UIColor redColor];
     [self.view addSubview:view];
     
 }
 
+-(void)viewLayerShowAnnimation{
+//    1、透明度的创建动画   相关keypath backgroundColor  cornerRadius 等 这些都是api中的私有属性
+    UIView *opacityView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-50, 110, 100, 20)];
+    opacityView.backgroundColor=[UIColor redColor];
+    [self.view.layer addSublayer:opacityView.layer];
+    // 透明度淡入
+    CABasicAnimation* fadeIn=[CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeIn.fromValue=@(0);
+    fadeIn.toValue=@(1);
+    fadeIn.duration=3;
+    fadeIn.fillMode=kCAFillModeBackwards;
+    fadeIn.beginTime=CACurrentMediaTime()+0.5;
+    [opacityView.layer addAnimation:fadeIn forKey:nil];
+    
+    // 左侧飞入
+    CABasicAnimation *flyRight=[CABasicAnimation animationWithKeyPath:@"position.x"];
+    flyRight.fromValue=@(-90);
+    flyRight.toValue=@(self.view.frame.size.width/2-50);
+    flyRight.duration=0.5;
+    flyRight.beginTime=CACurrentMediaTime()+3.5;
+    flyRight.fillMode=kCAFillModeBackwards;
+    [opacityView.layer addAnimation:flyRight forKey:nil];
+}
+-(void)viewAffineShowAnimation{
+    UIView *destinationView=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2-50, 150, 100, 20)];
+    [self.view addSubview:destinationView];
+    destinationView.backgroundColor=[UIColor purpleColor];
+    destinationView.transform=CGAffineTransformIdentity;
+    
+//    // 1 、位移变换
+//    [UIView animateWithDuration:2.0 animations:^{
+//        //在原基础上偏移的横纵坐标的偏移量
+////        destinationView.transform=CGAffineTransformMakeTranslation(0, 50);  a b c d 为1 0 0 1 矩阵  跟下面的效果一样
+//        destinationView.transform=CGAffineTransformMake(1, 0, 0, 1, 0, 50);
+//    }];
+    
+    
+    // 2、 缩放变换 在原基础上进行的缩放变化
+    [UIView animateWithDuration:1.0 delay:0.5 options:0 animations:^{
+        // 在原基础上横纵坐标的size 的缩放
+//        destinationView.transform =CGAffineTransformMakeScale(3, 3)//CGAffineTransformIdentity默认是 [ 1 0 0 1 0 0 ]  跟下面的效果一样
+         destinationView.transform=CGAffineTransformScale(CGAffineTransformIdentity,3, 3);
+        
+        
+    } completion:^(BOOL finished) {
+        // 再次变换回去
+        [UIView animateWithDuration:0.3 animations:^{
+            destinationView.transform=CGAffineTransformScale(CGAffineTransformIdentity,1, 1);
+        }];
+    }];
+}
 -(void)configSpeechFuntion {
     /** 语音识别同样的需要真机进行测试 ，因为需要硬件的支持，还需要访问权限 */
     //1.创建本地化标识符
@@ -122,7 +178,7 @@
             self.textView.text=result.bestTranscription.formattedString;
 //            // 如果想在你说的话后面一直拼接就不需要endAudio
 //            [self.recognitionRequest endAudio];
-            [self wordChangeToSpeech:self.textView.text];
+            [self performSelectorOnMainThread:@selector(wordChangeToSpeech:) withObject:self.textView.text waitUntilDone:YES];
             }
     }];
     AVAudioFormat * recordingFormat=[self.audioEngine.inputNode outputFormatForBus:0];
