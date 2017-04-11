@@ -13,6 +13,8 @@
 #import <Speech/Speech.h>
 // 文字转语音
 #import <AVFoundation/AVFoundation.h>
+// 进入swift 注释 ***** oc调用swift 1、import "工程名-Swift.h" 2、command + B 编译没问题就可以直接用了 http://www.cnblogs.com/mazhiqiang/p/5557002.html  *****
+#import "Duihao-Swift.h"
 @interface ViewController ()<SFSpeechRecognizerDelegate,AVSpeechSynthesizerDelegate>
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet UIButton *macroPhoneButton;
@@ -262,5 +264,14 @@
     // 如果想在你说的话后面一直拼接就不需要endAudio
     [self.recognitionRequest endAudio];
 }
+
+#pragma  mark  learn SWift
+- (IBAction)enterSwift:(id)sender {
+    firstClassController *firstClass=[[firstClassController alloc]init];
+    [firstClass setPersonMesWithPerAddress:@"河南 信阳市" perName:@"EAST"];
+    [firstClass logPerMes];
+    [self presentViewController:firstClass animated:YES completion:nil];
+}
+
 @end
 

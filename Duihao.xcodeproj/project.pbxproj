@@ -19,6 +19,7 @@
 		C59055301E9764DA00FE7DE1 /* red_pocket.caf in Resources */ = {isa = PBXBuildFile; fileRef = C590552F1E9764DA00FE7DE1 /* red_pocket.caf */; };
 		C59055331E9B2A0F00FE7DE1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59055321E9B2A0F00FE7DE1 /* AVFoundation.framework */; };
 		C59055351E9B2A2200FE7DE1 /* Speech.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C59055341E9B2A2200FE7DE1 /* Speech.framework */; };
+		C59055381E9C727600FE7DE1 /* firstClassController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C59055371E9C727600FE7DE1 /* firstClassController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,8 @@
 		C590552F1E9764DA00FE7DE1 /* red_pocket.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = red_pocket.caf; sourceTree = "<group>"; };
 		C59055321E9B2A0F00FE7DE1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C59055341E9B2A2200FE7DE1 /* Speech.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Speech.framework; path = System/Library/Frameworks/Speech.framework; sourceTree = SDKROOT; };
+		C59055361E9C727500FE7DE1 /* Duihao-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Duihao-Bridging-Header.h"; sourceTree = "<group>"; };
+		C59055371E9C727600FE7DE1 /* firstClassController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = firstClassController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +128,8 @@
 				C56745531E961B160060ABA8 /* Supporting Files */,
 				C56745861E961B8E0060ABA8 /* sucessView.h */,
 				C56745871E961B8E0060ABA8 /* sucessView.m */,
+				C59055371E9C727600FE7DE1 /* firstClassController.swift */,
+				C59055361E9C727500FE7DE1 /* Duihao-Bridging-Header.h */,
 			);
 			path = Duihao;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 					C567454F1E961B160060ABA8 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = J6HTH2R28B;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					C56745681E961B160060ABA8 = {
@@ -300,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C56745881E961B8E0060ABA8 /* sucessView.m in Sources */,
+				C59055381E9C727600FE7DE1 /* firstClassController.swift in Sources */,
 				C567455B1E961B160060ABA8 /* ViewController.m in Sources */,
 				C56745581E961B160060ABA8 /* AppDelegate.m in Sources */,
 				C56745551E961B160060ABA8 /* main.m in Sources */,
@@ -451,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = J6HTH2R28B;
 				INFOPLIST_FILE = Duihao/Info.plist;
@@ -460,6 +468,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Duihao/Duihao-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -468,6 +479,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = J6HTH2R28B;
 				INFOPLIST_FILE = Duihao/Info.plist;
@@ -477,6 +489,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Duihao/Duihao-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -484,6 +498,7 @@
 		C56745811E961B160060ABA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = DuihaoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -496,6 +511,7 @@
 		C56745821E961B160060ABA8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = DuihaoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -508,6 +524,7 @@
 		C56745841E961B160060ABA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = DuihaoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ddg.DuihaoUITests;
@@ -519,6 +536,7 @@
 		C56745851E961B160060ABA8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = DuihaoUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ddg.DuihaoUITests;
