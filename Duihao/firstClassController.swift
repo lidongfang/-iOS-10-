@@ -39,7 +39,7 @@ class firstClassController: UIViewController {
         print(dic);
         print(emptyArr);
         print(emptyDic);
-        // 可选型 类型后面加?    nil 不能用于非可选的常量和变量。如果代码中有常量或者变量需要处理值缺失的情况，把它们声明成对应的可选类型。
+        // 可选型 类型后面加?    nil 不能用于非可选的常量和变量。如果代码中有常量或者变量需要处理值缺失的情况，把它们声明成对应的可选类型。 如果定义一个可选常量或变量没有提供默认值，它们会被自动设置为 nil,Swift 的 nil 和 Objective-C 的 nil 并不一样。在 Objective-C 中，nil 是一个指向不存在对象的指针。在 Swift 中，nil 不是指针，它是一个确定的值，用来表示值的缺失。任何类型的可选都可以被设置为 nil，不只是对象类型
         var optionString : String? = "lucy";
         optionString = nil;
         if optionString != nil {
